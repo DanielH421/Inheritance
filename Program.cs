@@ -61,7 +61,7 @@ class Program
             double salary = double.Parse(split[7]);
             return new Salaried(id, name, address, phone, sin, dob, dept, salary);
         }
-        else if (type >= 5 && type <= 7)
+        if (type >= 5 && type <= 7)
         {
             double rate = double.Parse(split[7]);
             double hours = double.Parse(split[8]);
