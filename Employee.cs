@@ -1,6 +1,6 @@
 namespace inheritance;
 
-public abstract class Employee
+public class Employee
 {
     private string _id;
     private string _name;
@@ -65,7 +65,11 @@ public abstract class Employee
         _dept = dept;
     }
 
-    public abstract double GetWeeklyPay();
+    public virtual double GetWeeklyPay()
+    {
+        // If used properly.. you will never get -1
+        return -1.0;
+    }
 
     public string ToString()
     {
