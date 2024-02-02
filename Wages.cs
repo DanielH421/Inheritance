@@ -15,7 +15,7 @@ public class Wages : Employee
     }
 
 
-    public double GetPay()
+    public override double GetWeeklyPay()
     {
         return this.hours * this.rate;
     }

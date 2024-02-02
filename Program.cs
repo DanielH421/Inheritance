@@ -26,8 +26,8 @@ class Program
 
         Console.WriteLine($"The total weekly payout is ${total_pay}.");
         Console.WriteLine($"The average weekly pay is ${average}.");
-        Console.WriteLine($"The highest paid employee is {highest_pay.Name} at ${weeklyWage(highest_pay)} per week.");
-        Console.WriteLine($"The lowest paid employee is {lowest_pay.Name} at ${weeklyWage(lowest_pay)} per week.");
+        Console.WriteLine($"The highest paid employee is {highest_pay.Name} at ${highest_pay.GetWeeklyPay()} per week.");
+        Console.WriteLine($"The lowest paid employee is {lowest_pay.Name} at ${highest_pay.GetWeeklyPay()} per week.");
 
         double[] count_results = rolePercentage(employees);
 
@@ -77,33 +77,7 @@ class Program
         // the employee's ID is null
         return null;
     }
-
-
-
-    // return the weekly wage of an employee based on their role
-    static double weeklyWage(Employee employee)
-    {
-        if(employee.GetType() == typeof(Salaried))
-        {
-            Salaried salary = (Salaried) employee;
-            // divide by a year and multiply by 7 to get a week
-            return (salary.GetPay() / 365) * 7;
-        }
-
-        if (employee.GetType() == typeof(Wages))
-        {
-            Wages wage = (Wages) employee;
-            return wage.GetPay();
-        } 
-
-        if(employee.GetType() == typeof(PartTime))
-        {
-            PartTime parttime = (PartTime) employee;
-            return parttime.GetPay();
-        }
-
-        return -1;
-    }
+    
 
 
     // loops through a list of employees and returns the highest paid
@@ -112,14 +86,14 @@ class Program
         Employee highest_pay = null;
         foreach (Employee employee in employees)
         {
-            double weekly = weeklyWage(employee);
+            double weekly = employee.GetWeeklyPay();
             if (highest_pay == null)
             {
                 highest_pay = employee;
             }
             else
             {
-                if (weeklyWage(highest_pay) < weekly)
+                if (highest_pay.GetWeeklyPay() < weekly)
                 {
                     highest_pay = employee;
                 }
@@ -135,14 +109,14 @@ class Program
         Employee lowest_pay = null;
         foreach(Employee employee in employees)
         {
-            double weekly = weeklyWage(employee);
+            double weekly = employee.GetWeeklyPay();
             if (lowest_pay == null)
             {
                 lowest_pay = employee;
             }
             else
             {
-                if (weeklyWage(lowest_pay) > weekly)
+                if (lowest_pay.GetWeeklyPay() > weekly)
                 {
                     lowest_pay = employee;
                 }
@@ -158,7 +132,7 @@ class Program
         double total_pay = 0;
         foreach (Employee employee in employees)
         {
-            double weekly = weeklyWage(employee);
+            double weekly = employee.GetWeeklyPay();
             total_pay += weekly;
         }
         return total_pay;

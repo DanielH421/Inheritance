@@ -19,9 +19,9 @@ public class Salaried : Employee
     }
 
 
-    public double GetPay()
+    public override double GetWeeklyPay()
     {
-        return this.salary;
+        return (this.salary / 365) * 7;
     }
 
     public string ToString()
